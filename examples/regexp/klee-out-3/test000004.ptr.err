@@ -1,0 +1,20 @@
+Error: memory error: out of bound pointer
+File: /home/shaw/work/klee/examples/regexp/Regexp.c
+Line: 23
+Stack: 
+	#0 00000080 in matchhere (re=157838279, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:23
+	#1 00000024 in matchstar (c, re=157838279, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:16
+	#2 00000103 in matchhere (re=157838277, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:26
+	#3 00000024 in matchstar (c, re=157838277, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:16
+	#4 00000103 in matchhere (re=157838275, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:26
+	#5 00000024 in matchstar (c, re=157838275, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:16
+	#6 00000103 in matchhere (re=157838273, text=157776721) at /home/shaw/work/klee/examples/regexp/Regexp.c:26
+	#7 00000155 in matchhere (re=157838272, text=157776720) at /home/shaw/work/klee/examples/regexp/Regexp.c:30
+	#8 00000196 in match (re=157838272, text=157776720) at /home/shaw/work/klee/examples/regexp/Regexp.c:38
+	#9 00000240 in main () at /home/shaw/work/klee/examples/regexp/Regexp.c:61
+Info: 
+	address: 157838279
+	next: object at 157838288 of size 4
+		MO10[4] allocated at main():  %0 = alloca i32
+	prev: object at 157838272 of size 7
+		MO11[7] allocated at main():  %re = alloca [7 x i8]

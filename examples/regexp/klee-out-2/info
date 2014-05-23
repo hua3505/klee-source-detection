@@ -1,0 +1,21 @@
+klee --only-output-states-covering-new Regexp.o
+PID: 11955
+Started: 2014-05-18 22:23:12
+BEGIN searcher description
+<InterleavedSearcher> containing 2 searchers:
+RandomPathSearcher
+WeightedRandomSearcher::CoveringNew
+</InterleavedSearcher>
+END searcher description
+Finished: 2014-05-18 22:23:46
+Elapsed: 00:00:34
+KLEE: done: explored paths = 7692
+KLEE: done: avg. constructs per query = 21
+KLEE: done: total queries = 111
+KLEE: done: valid queries = 0
+KLEE: done: invalid queries = 111
+KLEE: done: query cex = 111
+
+KLEE: done: total instructions = 5086685
+KLEE: done: completed paths = 7692
+KLEE: done: generated tests = 19
