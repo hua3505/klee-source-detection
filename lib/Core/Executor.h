@@ -70,7 +70,29 @@ namespace klee {
   class TreeStreamWriter;
   template<class T> class ref;
 
+struct VariableCall {
+    int line;
+    int assassemblyLine;
+    int writeOrRead;
+    std::string name;
+    std::string functionName;
+};
 
+class GlobalVariable {
+private:
+    std::vector <VariableCall> callList;
+public:
+    GlobalVariable();
+    ~GlobalVariable();
+};
+
+class GlobalVariableRecord {
+private:
+    std::vector <GlobalVariable> varList;
+public:
+    GlobalVariableRecord();
+	~GlobalVariableRecord();
+};
 
   /// \todo Add a context object to keep track of data only live
   /// during an instruction step. Should contain addedStates,
