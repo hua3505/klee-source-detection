@@ -238,6 +238,100 @@ namespace klee {
   RNG theRNG;
 }
 
+VariableCall::VariableCall()
+{
+	;
+}
+
+
+//VariableCall::VariableCall(const VariableCall & varCall)
+//    : line(line), assassemblyLine(assassemblyLine), writeOrRead(writeOrRead),
+//      name(name), functionName(functionName)
+//{
+//	;
+//}
+
+GlobalVar::GlobalVar()
+{
+	;
+}
+
+GlobalVar::GlobalVar(const VariableCall & varCall)
+{
+	SetName(varCall.name);
+	AddVarCall(varCall);
+}
+
+GlobalVar::~GlobalVar()
+{
+    ;
+}
+
+void GlobalVar::AddVarCall(const VariableCall & varCall)
+{
+	callList.push_back(varCall);
+}
+
+void GlobalVar::SetName(const std::string name)
+{
+	this->name = name;
+}
+
+std::string GlobalVar::GetName() const
+{
+	return name;
+}
+
+void GlobalVar::Output()
+{
+	std::vector<VariableCall>::iterator it;
+	for (it = callList.begin(); it != callList.end(); ++it)
+	{
+		std::cout << it->line << ' ' << it->writeOrRead << ' '
+				  << it->functionName << ' ' << it->name << std::endl;
+	}
+}
+
+GlobalVariableRecord::GlobalVariableRecord()
+{
+	;
+}
+
+GlobalVariableRecord::~GlobalVariableRecord()
+{
+	//delete GlobalVariables in map
+	std::map<std::string, GlobalVar *>::iterator it;
+	for (it = varMap.begin(); it != varMap.end(); ++it)
+	{
+		delete it->second;
+		it->second = NULL;
+	}
+	varMap.clear();
+}
+
+void GlobalVariableRecord::AddVarCall(const VariableCall &varCall)
+{
+	std::map<std::string, GlobalVar *>::iterator it;
+	it = varMap.find(varCall.name);
+	if (it != varMap.end())
+	{
+		it->second->AddVarCall(varCall);
+	}
+	else
+	{
+        GlobalVar * var = new GlobalVar(varCall);
+        varMap.insert(std::map<std::string, GlobalVar *>::value_type(var->GetName(), var));
+	}
+}
+
+void GlobalVariableRecord::Output()
+{
+	std::map<std::string, GlobalVar *>::iterator it;
+	for (it = varMap.begin(); it != varMap.end(); ++it)
+	{
+		it->second->Output();
+	}
+}
 
 Executor::Executor(const InterpreterOptions &opts,
                    InterpreterHandler *ih) 
@@ -273,6 +367,7 @@ Executor::Executor(const InterpreterOptions &opts,
   this->solver = new TimingSolver(solver, stpSolver);
 
   memory = new MemoryManager();
+  globalVars = new GlobalVariableRecord();
 }
 
 
@@ -308,6 +403,7 @@ const Module *Executor::setModule(llvm::Module *module,
 }
 
 Executor::~Executor() {
+  delete globalVars;
   delete memory;
   delete externalDispatcher;
   if (processTree)
@@ -1902,7 +1998,7 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
   case Instruction::Store: {
     ref<Expr> base = eval(ki, 1, state).value;
     ref<Expr> value = eval(ki, 0, state).value;
-    executeMemoryOperation(state, true, base, value, 0);
+    executeMemoryOperation(state, true, base, value, ki);
     break;
   }
 
@@ -2995,6 +3091,17 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     
     ref<Expr> offset = mo->getOffsetExpr(address);
 
+    if (mo->isGlobal)
+    {
+    	VariableCall * pVarCall = new VariableCall();
+    	pVarCall->line = target->info->line;
+    	pVarCall->assassemblyLine = target->info->assemblyLine;
+    	pVarCall->name = mo->name;
+    	pVarCall->writeOrRead = isWrite;
+    	globalVars->AddVarCall(*pVarCall);
+    	delete pVarCall;
+    }
+
     bool inBounds;
     solver->setTimeout(stpTimeout);
     bool success = solver->mustBeTrue(state, 
@@ -3267,6 +3374,8 @@ void Executor::runFunctionAsMain(Function *f,
 
   if (statsTracker)
     statsTracker->done();
+
+  globalVars->Output();
 }
 
 unsigned Executor::getPathStreamID(const ExecutionState &state) {

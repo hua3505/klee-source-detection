@@ -76,22 +76,33 @@ struct VariableCall {
     int writeOrRead;
     std::string name;
     std::string functionName;
+
+    VariableCall();
+    //VariableCall(const VariableCall & varCall);
 };
 
-class GlobalVariable {
+class GlobalVar {
 private:
     std::vector <VariableCall> callList;
+    std::string name;
 public:
-    GlobalVariable();
-    ~GlobalVariable();
+    GlobalVar();
+    GlobalVar(const VariableCall & varCall);
+    ~GlobalVar();
+    void SetName(const std::string name);
+    std::string GetName() const;
+    void AddVarCall(const VariableCall & varCall);
+    void Output();
 };
 
 class GlobalVariableRecord {
 private:
-    std::vector <GlobalVariable> varList;
+    std::map<std::string, GlobalVar *> varMap;
 public:
     GlobalVariableRecord();
 	~GlobalVariableRecord();
+	void AddVarCall(const VariableCall & varCall);
+	void Output();
 };
 
   /// \todo Add a context object to keep track of data only live
@@ -135,6 +146,7 @@ private:
   SpecialFunctionHandler *specialFunctionHandler;
   std::vector<TimerInfo*> timers;
   PTree *processTree;
+  GlobalVariableRecord * globalVars;
 
   /// Used to track states that have been added during the current
   /// instructions step. 
