@@ -25,6 +25,7 @@
 #include <string>
 #include <map>
 #include <set>
+#include <fstream>
 
 struct KTest;
 
@@ -92,12 +93,13 @@ public:
     void SetName(const std::string name);
     std::string GetName() const;
     void AddVarCall(const VariableCall & varCall);
-    void Output(const std::string file);
+    void Output(std::ofstream & fout);
 };
 
 class GlobalVariableRecord {
 private:
     std::map<std::string, GlobalVar *> varMap;
+    std::ofstream out;
 public:
     GlobalVariableRecord();
 	~GlobalVariableRecord();

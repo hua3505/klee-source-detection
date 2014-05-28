@@ -283,23 +283,21 @@ std::string GlobalVar::GetName() const
 	return name;
 }
 
-void GlobalVar::Output(const std::string file)
+void GlobalVar::Output(std::ofstream & fout)
 {
 	std::vector<VariableCall>::iterator it;
-	std::string fout = file;
-	fout.replace(fout.rfind(".c"), 2, ".gvar");
-	std::ofstream out(fout.c_str(), std::ios_base::out | std::ios_base::app);
 	for (it = callList.begin(); it != callList.end(); ++it)
 	{
 		std::cout << it->line << ' ' << it->writeOrRead << ' '
 				  << it->functionName << ' ' << it->name << std::endl;
-		out << it->line << ' ' << it->writeOrRead << ' '
+		fout << it->line << ' ' << it->writeOrRead << ' '
 			<< it->functionName << ' ' << it->name << "\n";
 	}
 
 }
 
 GlobalVariableRecord::GlobalVariableRecord()
+    : out(NULL)
 {
 	;
 }
@@ -314,6 +312,7 @@ GlobalVariableRecord::~GlobalVariableRecord()
 		it->second = NULL;
 	}
 	varMap.clear();
+	out.clear();
 }
 
 void GlobalVariableRecord::AddVarCall(const VariableCall &varCall)
@@ -333,10 +332,17 @@ void GlobalVariableRecord::AddVarCall(const VariableCall &varCall)
 
 void GlobalVariableRecord::Output(const std::string file)
 {
+	if (NULL == out)
+	{
+		std::string fout = file;
+		fout.replace(fout.rfind(".c"), 2, ".gvar");
+		out.open(fout.c_str(), std::ios_base::out);
+	}
+
 	std::map<std::string, GlobalVar *>::iterator it;
 	for (it = varMap.begin(); it != varMap.end(); ++it)
 	{
-		it->second->Output(file);
+		it->second->Output(out);
 	}
 }
 
