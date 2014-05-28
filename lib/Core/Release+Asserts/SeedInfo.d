@@ -18,7 +18,11 @@
  /home/shaw/work/llvm-2.9/include/llvm/ADT/DenseMapInfo.h \
  /home/shaw/work/llvm-2.9/include/llvm/ADT/SmallVector.h \
  /home/shaw/work/llvm-2.9/include/llvm/ADT/StringExtras.h \
- /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h SeedInfo.h \
+ /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Value.h \
+ /home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Use.h \
+ /home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h SeedInfo.h \
  /home/shaw/work/klee/include/klee/util/Assignment.h \
  /home/shaw/work/klee/include/klee/util/ExprEvaluator.h \
  /home/shaw/work/klee/include/klee/util/ExprVisitor.h \
@@ -78,6 +82,14 @@ Context.h:
 /home/shaw/work/llvm-2.9/include/llvm/ADT/StringExtras.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Value.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Use.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h:
 
 SeedInfo.h:
 

@@ -81,6 +81,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include <sys/mman.h>
 
@@ -285,11 +286,13 @@ std::string GlobalVar::GetName() const
 void GlobalVar::Output()
 {
 	std::vector<VariableCall>::iterator it;
+	ofsream out(, ios::out);
 	for (it = callList.begin(); it != callList.end(); ++it)
 	{
 		std::cout << it->line << ' ' << it->writeOrRead << ' '
 				  << it->functionName << ' ' << it->name << std::endl;
 	}
+
 }
 
 GlobalVariableRecord::GlobalVariableRecord()
@@ -3098,6 +3101,7 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     	pVarCall->assassemblyLine = target->info->assemblyLine;
     	pVarCall->name = mo->name;
     	pVarCall->writeOrRead = isWrite;
+    	pVarCall->functionName = target->inst->getParent()->getParent()->getName();
     	globalVars->AddVarCall(*pVarCall);
     	delete pVarCall;
     }

@@ -22,8 +22,12 @@
  /home/shaw/work/klee/include/klee/Internal/ADT/ImmutableTree.h \
  CoreStats.h /home/shaw/work/klee/include/klee/Statistic.h Memory.h \
  Context.h /home/shaw/work/llvm-2.9/include/llvm/ADT/StringExtras.h \
- /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h TimingSolver.h \
- /home/shaw/work/klee/include/klee/Solver.h \
+ /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Value.h \
+ /home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Use.h \
+ /home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h \
+ TimingSolver.h /home/shaw/work/klee/include/klee/Solver.h \
  /home/shaw/work/klee/include/klee/TimerStatIncrementer.h \
  /home/shaw/work/klee/include/klee/Statistics.h \
  /home/shaw/work/klee/include/klee/Statistic.h \
@@ -82,6 +86,14 @@ Context.h:
 /home/shaw/work/llvm-2.9/include/llvm/ADT/StringExtras.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Value.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Use.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h:
 
 TimingSolver.h:
 

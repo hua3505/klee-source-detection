@@ -6,6 +6,11 @@ float b;
 char str[10];
 int * pi;
 
+void f1()
+{
+    a++;
+}
+
 int main()
 {
     char c;
@@ -13,6 +18,7 @@ int main()
     c = str[1];
 	pi = &a;
 	ai = a;
+	a++;
 	pi = (int *)malloc(sizeof(int));
     *pi = 100;
 	*pi = 234;
@@ -24,5 +30,8 @@ int main()
 	{
         ai = 2;
 	}
+	f1();
     return 0;
 }
+
+

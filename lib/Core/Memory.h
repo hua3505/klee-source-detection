@@ -14,6 +14,7 @@
 #include "klee/Expr.h"
 
 #include "llvm/ADT/StringExtras.h"
+#include <llvm/Value.h>
 
 #include <vector>
 #include <string>
@@ -98,7 +99,12 @@ public:
       fake_object(false),
       isUserSpecified(false),
       parent(_parent), 
-      allocSite(_allocSite) {
+      allocSite(_allocSite)
+  {
+	  if(!_isFixed && (_isGlobal  || !_isLocal) )
+	  {
+	      name = allocSite->getNameStr();
+	  }
   }
 
   ~MemoryObject();

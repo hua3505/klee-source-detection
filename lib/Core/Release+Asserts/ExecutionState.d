@@ -32,14 +32,14 @@
  /home/shaw/work/klee/include/klee/Interpreter.h Memory.h Context.h \
  /home/shaw/work/llvm-2.9/include/llvm/ADT/StringExtras.h \
  /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h \
- /home/shaw/work/llvm-2.9/include/llvm/Function.h \
- /home/shaw/work/llvm-2.9/include/llvm/GlobalValue.h \
- /home/shaw/work/llvm-2.9/include/llvm/Constant.h \
- /home/shaw/work/llvm-2.9/include/llvm/User.h \
  /home/shaw/work/llvm-2.9/include/llvm/Value.h \
  /home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h \
  /home/shaw/work/llvm-2.9/include/llvm/Use.h \
  /home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Function.h \
+ /home/shaw/work/llvm-2.9/include/llvm/GlobalValue.h \
+ /home/shaw/work/llvm-2.9/include/llvm/Constant.h \
+ /home/shaw/work/llvm-2.9/include/llvm/User.h \
  /home/shaw/work/llvm-2.9/include/llvm/CallingConv.h \
  /home/shaw/work/llvm-2.9/include/llvm/BasicBlock.h \
  /home/shaw/work/llvm-2.9/include/llvm/Instruction.h \
@@ -122,14 +122,6 @@ Context.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/ADT/StringRef.h:
 
-/home/shaw/work/llvm-2.9/include/llvm/Function.h:
-
-/home/shaw/work/llvm-2.9/include/llvm/GlobalValue.h:
-
-/home/shaw/work/llvm-2.9/include/llvm/Constant.h:
-
-/home/shaw/work/llvm-2.9/include/llvm/User.h:
-
 /home/shaw/work/llvm-2.9/include/llvm/Value.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/AbstractTypeUser.h:
@@ -137,6 +129,14 @@ Context.h:
 /home/shaw/work/llvm-2.9/include/llvm/Use.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/ADT/PointerIntPair.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Function.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/GlobalValue.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/Constant.h:
+
+/home/shaw/work/llvm-2.9/include/llvm/User.h:
 
 /home/shaw/work/llvm-2.9/include/llvm/CallingConv.h:
 
