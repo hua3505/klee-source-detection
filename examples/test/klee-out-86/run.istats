@@ -1,0 +1,65 @@
+version: 1
+creator: klee
+pid: 1000
+cmd: test.o
+
+
+positions: instr line
+event: Icov : CoveredInstructions
+event: Forks : Forks
+event: Ireal : InstructionRealTimes
+event: Itime : InstructionTimes
+event: I : Instructions
+event: UCdist : MinDistToUncovered
+event: Rtime : ResolveTime
+event: States : States
+event: Iuncov : UncoveredInstructions
+event: Q : Queries
+event: Qiv : QueriesInvalid
+event: Qv : QueriesValid
+event: Qtime : QueryTime
+events: Icov Forks Ireal Itime I UCdist Rtime States Iuncov Q Qiv Qv Qtime 
+ob=/home/shaw/work/klee/examples/test/./klee-out-86/assembly.ll
+fn=f1
+fl=/home/shaw/work/klee/examples/test/test.c
+13 11 1 0 0 0 1 0 0 0 0 0 0 0 0 
+14 11 1 0 0 0 1 0 0 0 0 0 0 0 0 
+15 11 1 0 0 0 1 0 0 0 0 0 0 0 0 
+16 12 1 0 0 0 1 0 0 0 0 0 0 0 0 
+fn=main
+21 17 1 0 0 0 1 0 0 0 0 0 0 0 0 
+22 17 1 0 0 0 1 0 0 0 0 0 0 0 0 
+23 17 1 0 0 0 1 0 0 0 0 0 0 0 0 
+24 17 1 0 0 0 1 0 0 0 0 0 0 0 0 
+25 17 1 0 0 0 1 0 0 0 0 0 0 0 0 
+26 18 1 0 0 0 1 0 0 0 0 0 0 0 0 
+27 18 1 0 0 0 1 0 0 0 0 0 0 0 0 
+28 19 1 0 0 0 1 0 0 0 0 0 0 0 0 
+29 20 1 0 0 0 1 0 0 0 0 0 0 0 0 
+30 20 1 0 0 0 1 0 0 0 0 0 0 0 0 
+31 21 1 0 0 0 1 0 0 0 0 0 0 0 0 
+32 21 1 0 0 0 1 0 0 0 0 0 0 0 0 
+33 21 1 0 0 0 1 0 0 0 0 0 0 0 0 
+34 22 1 0 0 0 1 0 0 0 0 0 0 0 0 
+35 22 1 0 0 0 1 0 0 0 0 0 0 0 0 
+36 22 1 0 0 0 1 0 0 0 0 0 0 0 0 
+37 23 1 0 0 0 1 0 0 0 0 0 0 0 0 
+38 23 1 0 0 0 1 0 0 0 0 0 0 0 0 
+39 24 1 0 0 0 1 0 0 0 0 0 0 0 0 
+40 24 1 0 0 0 1 0 0 0 0 0 0 0 0 
+41 25 1 0 0 0 1 0 0 0 0 0 0 0 0 
+42 25 1 0 0 0 1 0 0 0 0 0 0 0 0 
+43 25 1 0 0 0 1 0 0 0 0 0 0 0 0 
+46 27 1 0 0 0 1 0 0 0 0 0 0 0 0 
+47 27 1 0 0 0 1 0 0 0 0 0 0 0 0 
+50 31 0 0 0 0 0 0 0 0 1 0 0 0 0 
+51 31 0 0 0 0 0 0 0 0 1 0 0 0 0 
+54 33 1 0 0 0 1 0 0 0 0 0 0 0 0 
+cfn=f1
+calls=1 13 11
+54 33 4 0 0 0 4 0 0 0 0 0 0 0 0 
+55 34 1 0 0 0 1 0 0 0 0 0 0 0 0 
+56 34 1 0 0 0 1 0 0 0 0 0 0 0 0 
+57 34 1 0 0 0 1 0 0 0 0 0 0 0 0 
+58 34 1 0 0 0 1 0 0 0 0 0 0 0 0 
+59 34 1 0 0 0 1 0 0 0 0 0 0 0 0 

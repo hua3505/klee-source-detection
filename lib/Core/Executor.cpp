@@ -283,14 +283,18 @@ std::string GlobalVar::GetName() const
 	return name;
 }
 
-void GlobalVar::Output()
+void GlobalVar::Output(const std::string file)
 {
 	std::vector<VariableCall>::iterator it;
-	ofsream out(, ios::out);
+	std::string fout = file;
+	fout.replace(fout.rfind(".c"), 2, ".gvar");
+	std::ofstream out(fout.c_str(), std::ios_base::out | std::ios_base::app);
 	for (it = callList.begin(); it != callList.end(); ++it)
 	{
 		std::cout << it->line << ' ' << it->writeOrRead << ' '
 				  << it->functionName << ' ' << it->name << std::endl;
+		out << it->line << ' ' << it->writeOrRead << ' '
+			<< it->functionName << ' ' << it->name << "\n";
 	}
 
 }
@@ -327,12 +331,12 @@ void GlobalVariableRecord::AddVarCall(const VariableCall &varCall)
 	}
 }
 
-void GlobalVariableRecord::Output()
+void GlobalVariableRecord::Output(const std::string file)
 {
 	std::map<std::string, GlobalVar *>::iterator it;
 	for (it = varMap.begin(); it != varMap.end(); ++it)
 	{
-		it->second->Output();
+		it->second->Output(file);
 	}
 }
 
@@ -3379,7 +3383,7 @@ void Executor::runFunctionAsMain(Function *f,
   if (statsTracker)
     statsTracker->done();
 
-  globalVars->Output();
+  globalVars->Output((*state->pc).info->file);
 }
 
 unsigned Executor::getPathStreamID(const ExecutionState &state) {

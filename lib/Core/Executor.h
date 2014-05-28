@@ -92,7 +92,7 @@ public:
     void SetName(const std::string name);
     std::string GetName() const;
     void AddVarCall(const VariableCall & varCall);
-    void Output();
+    void Output(const std::string file);
 };
 
 class GlobalVariableRecord {
@@ -102,7 +102,7 @@ public:
     GlobalVariableRecord();
 	~GlobalVariableRecord();
 	void AddVarCall(const VariableCall & varCall);
-	void Output();
+	void Output(const std::string file);
 };
 
   /// \todo Add a context object to keep track of data only live
