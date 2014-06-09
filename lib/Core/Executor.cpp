@@ -288,8 +288,8 @@ void GlobalVar::Output(std::ofstream & fout)
 	std::vector<VariableCall>::iterator it;
 	for (it = callList.begin(); it != callList.end(); ++it)
 	{
-		std::cout << it->line << ' ' << it->writeOrRead << ' '
-				  << it->functionName << ' ' << it->name << std::endl;
+		std::cout << it->name << '\t' << it->line << '\t' << it->assassemblyLine << '\t' << '\t' << it->writeOrRead << '\t' << '\t'
+				  << it->functionName << std::endl;
 		fout << it->line << ' ' << it->writeOrRead << ' '
 			<< it->functionName << ' ' << it->name << "\n";
 	}
@@ -339,6 +339,7 @@ void GlobalVariableRecord::Output(const std::string file)
 		out.open(fout.c_str(), std::ios_base::out);
 	}
 
+	std::cout << '\n' << "name" << '\t' << "line" << '\t' << "assassemblyLine" << '\t' << "writeOrRead" << "\t" << "functionName" << std::endl;
 	std::map<std::string, GlobalVar *>::iterator it;
 	for (it = varMap.begin(); it != varMap.end(); ++it)
 	{
@@ -3114,6 +3115,8 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     	pVarCall->functionName = target->inst->getParent()->getParent()->getName();
     	globalVars->AddVarCall(*pVarCall);
     	delete pVarCall;
+    	//llvm::errs() << *(state.pc->inst) << '\n';
+
     }
 
     bool inBounds;

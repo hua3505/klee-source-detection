@@ -1,0 +1,2 @@
+KLEE: ERROR: /home/shaw/work/klee/examples/thread/pthread.c:29: failed external call: pthread_join
+KLEE: NOTE: now ignoring this error at this location

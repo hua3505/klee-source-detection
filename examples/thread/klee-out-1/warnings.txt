@@ -1,0 +1,11 @@
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: pthread_create
+KLEE: WARNING: undefined reference to function: pthread_join
+KLEE: WARNING: undefined reference to function: puts
+KLEE: WARNING: undefined reference to function: semctl
+KLEE: WARNING: undefined reference to function: semget
+KLEE: WARNING: undefined reference to function: semop
+KLEE: WARNING ONCE: calling external: semget(0, 2, 950)
+KLEE: WARNING ONCE: calling external: semctl(65538, 0, 16, 0)
+KLEE: WARNING ONCE: calling external: pthread_create(162515520, 0, 162210952, 0)
+KLEE: WARNING ONCE: calling external: pthread_join(3074718528, 0)
