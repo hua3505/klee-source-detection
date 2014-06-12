@@ -149,6 +149,7 @@ private:
   std::vector<TimerInfo*> timers;
   PTree *processTree;
   GlobalVariableRecord * globalVars;
+  std::map <uint64_t, std::string> varAddress; //地址对应变量名
 
   /// Used to track states that have been added during the current
   /// instructions step. 

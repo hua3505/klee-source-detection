@@ -30,7 +30,7 @@ entry:
   store i32* %2, i32** @ipB, align 4, !dbg !32
   %3 = load i32** @ipB, align 4, !dbg !33
   store i32* %3, i32** %ipC, align 4, !dbg !33
-  %4 = load i32** @ipB, align 4, !dbg !34
+  %4 = load i32** %ipC, align 4, !dbg !34
   store i32 2, i32* %4, align 4, !dbg !34
   %5 = load i32** @ipB, align 4, !dbg !35
   store i32 3, i32* %5, align 4, !dbg !35

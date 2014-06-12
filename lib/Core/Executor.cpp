@@ -288,7 +288,12 @@ void GlobalVar::Output(std::ofstream & fout)
 	std::vector<VariableCall>::iterator it;
 	for (it = callList.begin(); it != callList.end(); ++it)
 	{
-		std::cout << it->name << '\t' << it->line << '\t' << it->assassemblyLine << '\t' << '\t' << it->writeOrRead << '\t' << '\t'
+		std::cout << it->name << '\t';
+		if (it->name.size() <= 8)
+		{
+			std::cout << '\t';
+		}
+		std::cout << it->line << '\t' << it->assassemblyLine << '\t' << '\t' << it->writeOrRead << '\t' << '\t'
 				  << it->functionName << std::endl;
 		fout << it->line << ' ' << it->writeOrRead << ' '
 			<< it->functionName << ' ' << it->name << "\n";
@@ -339,7 +344,7 @@ void GlobalVariableRecord::Output(const std::string file)
 		out.open(fout.c_str(), std::ios_base::out);
 	}
 
-	std::cout << '\n' << "name" << '\t' << "line" << '\t' << "assassemblyLine" << '\t' << "writeOrRead" << "\t" << "functionName" << std::endl;
+	std::cout << '\n' << "name" << '\t' << '\t' << "line" << '\t' << "assassemblyLine" << '\t' << "writeOrRead" << "\t" << "functionName" << std::endl;
 	std::map<std::string, GlobalVar *>::iterator it;
 	for (it = varMap.begin(); it != varMap.end(); ++it)
 	{
@@ -1203,6 +1208,7 @@ void Executor::executeCall(ExecutionState &state,
   if (f && f->isDeclaration()) {
     switch(f->getIntrinsicID()) {
     case Intrinsic::not_intrinsic:
+
       // state may be destroyed by this call, cannot touch
       callExternalFunction(state, ki, f, arguments);
       break;
@@ -2774,7 +2780,7 @@ void Executor::callExternalFunction(ExecutionState &state,
   // check if specialFunctionHandler wants it
   if (specialFunctionHandler->handle(state, function, target, arguments))
     return;
-  
+
   if (NoExternals && !okExternals.count(function->getName())) {
     std::cerr << "KLEE:ERROR: Calling not-OK external function : " 
               << function->getName().str() << "\n";
@@ -2924,6 +2930,14 @@ void Executor::executeAlloc(ExecutionState &state,
         for (unsigned i=0; i<count; i++)
           os->write(i, reallocFrom->read8(i));
         state.addressSpace.unbindObject(reallocFrom->getObject());
+      }
+
+      // 动态分配空间，保存地址
+      if (!isLocal)
+      {
+    	  std::stringstream sstream;
+    	  sstream << "m_" << mo->address;
+    	  varAddress.insert(std::map<uint64_t, std::string>::value_type(mo->address, sstream.str()));
       }
     }
   } else {
@@ -3115,8 +3129,22 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     	pVarCall->functionName = target->inst->getParent()->getParent()->getName();
     	globalVars->AddVarCall(*pVarCall);
     	delete pVarCall;
-    	//llvm::errs() << *(state.pc->inst) << '\n';
-
+    }
+    else
+    {
+    	std::map <uint64_t, std::string>::iterator it;
+    	it = varAddress.find(mo->address);
+    	if (it != varAddress.end())
+    	{
+    		VariableCall * pVarCall = new VariableCall();
+			pVarCall->line = target->info->line;
+			pVarCall->assassemblyLine = target->info->assemblyLine;
+			pVarCall->name = it->second;
+			pVarCall->writeOrRead = isWrite;
+			pVarCall->functionName = target->inst->getParent()->getParent()->getName();
+			globalVars->AddVarCall(*pVarCall);
+			delete pVarCall;
+    	}
     }
 
     bool inBounds;
